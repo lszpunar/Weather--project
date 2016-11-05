@@ -1,0 +1,14 @@
+<div class="container">
+	<br>
+		<div class="graph-display" ng-repeat="chart in charts" layout-padding>
+			<div ng-if="chart.data.length > 0">
+				<div class="chart-title" layout="row">
+					<b>{{chart.name}}</b>
+				</div>
+				<div id="center">
+					<canvas id="{{chart.name}}" class="chart chart-line" chart-data="chart.data" chart-labels="chart.labels" legend="true" chart-series="chart.series"/> <!-- chart-options="options" -->  <!-- chart-dataset-override="datasetOverride"  -->
+				</div>
+				<hr>
+			</div>
+		</div>
+	</div>

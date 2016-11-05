@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>SENSORS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Roboto:400,400italic,700">
+
+    <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<!-- apply our angular app to our site -->
+<body>
+
+<div id="header-wrapper">
+    <a class="toggleMenu ripple" href="javascript:;">
+        <i class="fa fa-bars"></i>
+    </a>
+    <h1>Sensors</h1>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="dropdowns" itemprop="mainEntity" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+    <div ng-controller="NavigationSensoreCtrl as navigation" class="wrapper">
+        <!--<div class='profilemenu'>-->
+        <!--<img alt='Admin' src='https://2.bp.blogspot.com/-GsQfvTESyZA/Vz_pQX3IkmI/AAAAAAAAD7A/z4uqNAtlPmMZhho4wbUcyMOFfYckJUQ7ACLcB/s1600/noimage.png' title='Admin'/>-->
+        <!--<h3>Nama Admin</h3>-->
+        <!--<a class='ripple' href='javascript:;' id='info2'>
+            <i class='fa fa-caret-down'></i>
+        </a>-->
+        <!--<p>emailkamu@gmail.com</p>-->
+        <!--<ul id='nav-menu1'>-->
+        <!--<li>
+            <a class='waves-effect' href='#' itemprop='url'>
+                <span itemprop='name'>Google+</span></a>
+        </li>-->
+        <!--<li>
+            <a class='waves-effect' href='#' itemprop='url'>
+                <span itemprop='name'>Facebook</span></a>
+        </li>-->
+        <!--<li>
+            <a class='waves-effect' href='#' itemprop='url'>
+                <span itemprop='name'>Twitter</span></a>
+        </li>-->
+        <!--</ul>-->
+        <!--</div>-->
+        <ul class="nav nav-menu2">
+            <li>
+                <a class="waves-effect" href="dashboard" ui-sref="dashboard" itemprop="url" title="Masign Grid">
+                    <span itemprop="name"><i class="fa fa-home"></i> Dashboard</span></a>
+            </li>
+            <!-- <li class="sub-menu">
+                <a class="dropdown waves-effect" href="javascript:;" title="Ranking"><i class="fa fa-trophy"></i> Ranking</a>
+                <ul class="sub">
+                    <li>
+                        <a class="waves-effect" href="#" itemprop="url">
+                            <span itemprop="name">Players</span></a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="#" itemprop="url">
+                            <span itemprop="name">Groups</span></a>
+                    </li>
+                    <li>
+                        <a class="waves-effect" href="#" itemprop="url">
+                            <span itemprop="name">Company</span></a>
+                    </li>
+                </ul>
+            </li> -->
+            <li>
+                <a class="waves-effect" href="chart" ui-sref="sensor({ sensorCode: -1 })" itemprop="url" title="Wykres zbiorowy"><!-- ui-sref="charts" --> 
+                    <span itemprop="name"><i class="fa fa-area-chart"></i> Charts</span></a>
+            </li>
+            <!-- <li>
+                <a class="waves-effect" href="#/chart" itemprop="url" title="Inbox">
+                    <span itemprop="name"><i class="fa fa-inbox"></i> Inbox</span></a>
+            </li> -->
+            <h2>SENSORS</h2>
+			
+			<li ng-repeat="sensor in sensors">
+                <a class="waves-effect" ui-sref="sensor({ sensorCode: {{sensor.Code}} })" itemprop="url" title="{{sensor.Name}}">
+                    <span itemprop="name"><i class="fa fa-check-square-o"></i>{{sensor.Name}}<br><small>{{sensor.Description}}</small></span>
+					
+					</a>					
+            </li>
+            <!-- <li>
+                <a class="waves-effect" href="#/dashboard" itemprop="url" title="Settings">
+                    <span itemprop="name"><i class="fa fa-gear"></i> Settings</span></a>
+            </li>
+            <li>
+                <a class="waves-effect" href="#" itemprop="url" title="My File">
+                    <span itemprop="name"><i class="fa fa-file"></i> My File</span></a>
+            </li>
+            <li>
+                <a class="waves-effect" href="#" itemprop="url" title="Upload">
+                    <span itemprop="name"><i class="fa fa-cloud-upload"></i> Upload</span></a>
+            </li> -->
+			
+        </ul>
+    </div>
+</nav>
+<div class="darkshadow"></div>
+<!-- <div class="largebanner"></div> -->
+<br><br>
+<!-- MAIN CONTENT -->
+<div class="container" id="route">
+
+    <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+    <div ui-view></div>
+
+</div>
+
+<!-- jQuery and Bootstrap -->
+<script src="scripts/jquery/jquery-2.1.1.min.js"></script>
+
+<!-- JS (load angular, ui-router, and our custom js file) -->
+<!-- <script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script> -->
+
+<!-- Main Angular scripts-->
+<script src="scripts/angular/angular.min.js"></script>
+<script src="scripts/angular/angular-aria.min.js"></script>
+<script src="scripts/angular-material/angular-material.min.js"></script>
+<!-- <script src="scripts/angular/angular-sanitize.js"></script> -->
+<script src="scripts/ui-router/angular-ui-router.min.js"></script>
+
+<script src="scripts/moment.js/moment.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+
+<script src="http://cdn.rawgit.com/jtblin/angular-chart.js/master/dist/angular-chart.js" type="text/javascript"></script>
+<!-- <script src="scripts/Chart.js"></script> -->
+
+<script src="js/myApp.js"></script>
+<script src="js/config/config2.js"></script>
+<script src="js/controllers/controllers.js"></script>
+<script src="js/services/services.js"></script>
+<script src="js/menu/sidebar_menu.js"></script>
+
+
+</body>
+</html>
