@@ -99,7 +99,9 @@ namespace Weather
                     List<ServerJsonDataFormat> deserializedServerData =
                         JsonConvert.DeserializeObject<List<ServerJsonDataFormat>>(jsonStr);
                     //var result = JsonConvert.SerializeObject(jsonStr, Formatting.Indented);
-                    var bob = JObject.Parse(json: jsonStr);
+
+
+                    //var bob = JObject.Parse(json: jsonStr);
 
                     //using (var sr = new StringReader(json))
                     //using (var jr = new JsonTextReader(sr))
