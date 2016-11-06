@@ -11,9 +11,18 @@
 	
 	try 
 	{
-		$conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+		//$conn = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
 		//echo "Connected to $dbname at $host successfully.";
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // <== add this line
+		//$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // <== add this line
+		
+		$conn = new PDO(
+		"mysql:host=$dbhost;dbname=$dbname", 
+		$dbuser, 
+		$dbpass, 
+		array(
+			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+			PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
+		));
 		
 		header('Content-Type: application/json');
 		/* echo "Connected successfully"; */
