@@ -1,0 +1,5 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/src/Clients/Android widget/Weather/packages/Newtonsoft.Json.9.0.1/lib
