@@ -56,7 +56,7 @@ namespace Weather
         public RemoteViews BuildUpdate(Context context)
         {
             // 
-            var lastSensoreData = GetLatestSensorsData();
+            var lastSensoreData = GetLatestSensorsData(context);
 
             // Build an update that holds the updated widget contents
             var updateViews = new RemoteViews(context.PackageName, JniIdentityHashCode);
@@ -81,7 +81,7 @@ namespace Weather
             return updateViews;
         }
 
-        private List<Sensor> GetLatestSensorsData()
+        private List<Sensor> GetLatestSensorsData(Context context)
         {
             var sensorsDataToPresentation = new List<Sensor>();
             using (var webClient = new WebClient())
@@ -93,11 +93,31 @@ namespace Weather
 
                 var jsonStr = Encoding.UTF8.GetString(json);
 
+
+
                 if (json != null)
                 {
+
+
+                    // Build an update that holds the updated widget contents
+                    var updateViews = new RemoteViews(context.PackageName, JniIdentityHashCode);
+
+                    updateViews.SetTextViewText(Resource.Id.blog_title, "TEMAT");
+                    updateViews.SetTextViewText(Resource.Id.creator, "CREATOR");
+
+                    // When user clicks on widget, launch to Wiktionary definition page
+                    if (!string.IsNullOrEmpty("s"))
+                    {
+                        Intent defineIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("iteon.pl"));
+
+                        PendingIntent pendingIntent = PendingIntent.GetActivity(context, 0, defineIntent, 0);
+                        updateViews.SetOnClickPendingIntent(Resource.Id.widget, pendingIntent);
+                    }
+
+
                     //List<ServerJsonDataFormat> outObject = JsonConvert.DeserializeObject<List<ServerJsonDataFormat>>(json);
-                    List<ServerJsonDataFormat> deserializedServerData =
-                        JsonConvert.DeserializeObject<List<ServerJsonDataFormat>>(jsonStr);
+                    //                    List<ServerJsonDataFormat> deserializedServerData =
+                    //                        JsonConvert.DeserializeObject<List<ServerJsonDataFormat>>(jsonStr);
                     //var result = JsonConvert.SerializeObject(jsonStr, Formatting.Indented);
 
 
@@ -111,48 +131,40 @@ namespace Weather
                     //    Console.WriteLine(u.user.display_name);
                     //}
 
-                    if (deserializedServerData != null)
-                    {
-                        var groupBySensoreCode = deserializedServerData.GroupBy(s => s.SensorCode).ToList();
-
-                        foreach (var sensoreData in groupBySensoreCode)
-                        {
-                            var sensor = new Sensor
-                            {
-                                SensoreCode = sensoreData.Key
-                            };
-
-                            var sensoreReadings = sensoreData.ToList();
-                            foreach (var sensoreReadingsDetails in sensoreReadings)
-                            {
-                                sensor.SensoreName = sensoreReadingsDetails.SensorName;
-                                sensor.SensoreDescription = sensoreReadingsDetails.SensorDescription;
-
-                                var sensorDataCos = new SensorData
-                                {
-                                    DataName = sensoreReadingsDetails.DataType,
-                                    DateTime = sensoreReadingsDetails.DateTime,
-                                    Symbol = sensoreReadingsDetails.DataTypeSymbol,
-                                    Value = sensoreReadingsDetails.Value
-                                };
-
-                                sensor.SensorDatas.Add(sensorDataCos);
-                            }
-                            sensorsDataToPresentation.Add(sensor);
-                        }
-                    }
+                    //                    if (deserializedServerData != null)
+                    //                    {
+                    //                        var groupBySensoreCode = deserializedServerData.GroupBy(s => s.SensorCode).ToList();
+                    //
+                    //                        foreach (var sensoreData in groupBySensoreCode)
+                    //                        {
+                    //                            var sensor = new Sensor
+                    //                            {
+                    //                                SensoreCode = sensoreData.Key
+                    //                            };
+                    //
+                    //                            var sensoreReadings = sensoreData.ToList();
+                    //                            foreach (var sensoreReadingsDetails in sensoreReadings)
+                    //                            {
+                    //                                sensor.SensoreName = sensoreReadingsDetails.SensorName;
+                    //                                sensor.SensoreDescription = sensoreReadingsDetails.SensorDescription;
+                    //
+                    //                                var sensorDataCos = new SensorData
+                    //                                {
+                    //                                    DataName = sensoreReadingsDetails.DataType,
+                    //                                    DateTime = sensoreReadingsDetails.DateTime,
+                    //                                    Symbol = sensoreReadingsDetails.DataTypeSymbol,
+                    //                                    Value = sensoreReadingsDetails.Value
+                    //                                };
+                    //
+                    //                                sensor.SensorDatas.Add(sensorDataCos);
+                    //                            }
+                    //                            sensorsDataToPresentation.Add(sensor);
+                    //                        }
+                    //                    }
                 }
             }
 
             return sensorsDataToPresentation;
         }
-
-        //    using (var reader = new StreamReader(stream))
-        //    using (var stream = new MemoryStream(data))
-        //{
-
-        //public static T Deserialize<T>(byte[] data) where T : class
-        //        return JsonSerializer.Create().Deserialize(reader, typeof(T)) as T;
-        //}
     }
 }

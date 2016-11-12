@@ -3,3 +3,8 @@
 ################################################################################
 
 /src/Clients/Android widget/Weather/packages/Newtonsoft.Json.9.0.1/lib
+/src/Clients/Android widget/Weather/packages/Newtonsoft.Json.9.0.1
+/src/Clients/Android widget/Weather/Weather/bin/Debug
+/src/Clients/Android widget/Weather/Weather/obj/Debug
+*.user
+/src/Clients/Android widget/Weather/.vs/Weather/v14/.suo

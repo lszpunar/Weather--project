@@ -18,7 +18,7 @@
 <resources>
   <string name="app_name">Weather widget</string>
 
-  <string name="widget_name">Weather smart home widget</string>
+  <string name="widget_name">Weather widget</string>
 
   <string name="widget_loading">Loading latest\nweather data\u2026</string>
 </resources>
